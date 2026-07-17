@@ -1,0 +1,68 @@
+:root {
+  --cream: #fcf4d9;
+  --maroon: #4b1f1f;
+  --peach: #fdcd8a;
+  --gold: #d4af37;
+  --charcoal: #333333;
+
+  --text: var(--charcoal);
+  --text-h: var(--maroon);
+  --bg: var(--cream);
+  --border: rgba(75, 31, 31, 0.15);
+
+  --sans: 'Poppins', system-ui, 'Segoe UI', Roboto, sans-serif;
+  --heading: 'Fraunces', serif;
+
+  font: 18px/145% var(--sans);
+  letter-spacing: 0.18px;
+  color-scheme: light;
+  color: var(--text);
+  background: var(--bg);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  @media (max-width: 1024px) {
+    font-size: 16px;
+  }
+}
+
+#root {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+}
+
+body {
+  margin: 0;
+}
+
+h1,
+h2 {
+  font-family: var(--heading);
+  font-weight: 500;
+  color: var(--text-h);
+}
+
+h1 {
+  font-size: 56px;
+  letter-spacing: -1.68px;
+  margin: 32px 0;
+  @media (max-width: 1024px) {
+    font-size: 36px;
+    margin: 20px 0;
+  }
+}
+h2 {
+  font-size: 24px;
+  line-height: 118%;
+  letter-spacing: -0.24px;
+  margin: 0 0 8px;
+  @media (max-width: 1024px) {
+    font-size: 20px;
+  }
+}
+p {
+  margin: 0;
+}
