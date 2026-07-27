@@ -11,7 +11,7 @@
   --border: rgba(75, 31, 31, 0.15);
 
   --sans: 'Poppins', system-ui, 'Segoe UI', Roboto, sans-serif;
-  --heading: 'Fraunces', serif;
+  --heading: var(--sans);
 
   font: 18px/145% var(--sans);
   letter-spacing: 0.18px;
