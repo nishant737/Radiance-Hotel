@@ -17,7 +17,7 @@ export function RoomsCarousel({ rooms }: RoomsCarouselProps) {
   const groupRef = useRef<HTMLDivElement>(null)
   const x = useMotionValue(0)
   const paused = useRef(false)
-  const resumeTimeout = useRef<ReturnType<typeof setTimeout>>()
+  const resumeTimeout = useRef<ReturnType<typeof setTimeout> | undefined>(undefined)
 
   useAnimationFrame((_, delta) => {
     if (paused.current) return
