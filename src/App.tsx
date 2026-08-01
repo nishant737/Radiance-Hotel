@@ -7,6 +7,7 @@ import { RevealParagraph } from './RevealText'
 import { RoomsCarousel } from './RoomsCarousel'
 import { JourneySection } from './JourneySection'
 import { ExploreSection } from './ExploreSection'
+import { GallerySection } from './GallerySection'
 import './App.css'
 
 const navLinks = ['Rooms', 'The Hotel', 'Dining', 'Gallery', 'Mangalore Offers']
@@ -208,6 +209,8 @@ function App() {
       <JourneySection />
 
       <ExploreSection />
+
+      <GallerySection />
     </>
   )
 }
