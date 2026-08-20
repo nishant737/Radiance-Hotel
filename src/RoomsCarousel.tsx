@@ -3,6 +3,7 @@ import { motion, useMotionValue, useAnimationFrame, animate } from 'framer-motio
 
 interface Room {
   name: string
+  image: string
 }
 
 interface RoomsCarouselProps {
@@ -76,7 +77,12 @@ export function RoomsCarousel({ rooms }: RoomsCarouselProps) {
                 className={`rooms__card rooms__card--pos${i}`}
               >
                 <div className="rooms__card-image">
-                  <span className="rooms__card-placeholder">Room Photo</span>
+                  <img
+                    className="rooms__card-photo"
+                    src={room.image}
+                    alt={room.name}
+                    loading="lazy"
+                  />
                   <div className="rooms__card-scrim" />
                   <button type="button" className="rooms__card-more">
                     Show More

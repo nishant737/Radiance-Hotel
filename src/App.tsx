@@ -3,11 +3,17 @@ import { motion } from 'framer-motion'
 import logo from './assets/logo-white.png'
 import heroVideo from './assets/radianceherosection.mp4'
 import roopaImg from './assets/roopa.png'
+import deluxeRoomImg from './assets/Deluxeroom.jpg'
+import summerSuiteImg from './assets/Summersuite.jpg'
+import executiveSuiteImg from './assets/Executivesuite.jpg'
+import premiumSuiteImg from './assets/Premimumsuite.jpg'
+import familySuiteImg from './assets/Familysuite.jpg'
 import { RevealParagraph } from './RevealText'
 import { RoomsCarousel } from './RoomsCarousel'
 import { JourneySection } from './JourneySection'
 import { ExploreSection } from './ExploreSection'
 import { GallerySection } from './GallerySection'
+import { ContactSection } from './ContactSection'
 import './App.css'
 
 const navLinks = ['Rooms', 'The Hotel', 'Dining', 'Gallery', 'Mangalore Offers']
@@ -23,11 +29,11 @@ const roopaParagraphs = [
 ]
 
 const roomCards = [
-  { name: 'Deluxe Room' },
-  { name: 'Summer Suite' },
-  { name: 'Executive Suite' },
-  { name: 'Premium Suite' },
-  { name: 'Family Suite' },
+  { name: 'Deluxe Room', image: deluxeRoomImg },
+  { name: 'Summer Suite', image: summerSuiteImg },
+  { name: 'Executive Suite', image: executiveSuiteImg },
+  { name: 'Premium Suite', image: premiumSuiteImg },
+  { name: 'Family Suite', image: familySuiteImg },
 ]
 
 const fadeUp = {
@@ -211,6 +217,8 @@ function App() {
       <ExploreSection />
 
       <GallerySection />
+
+      <ContactSection />
     </>
   )
 }

@@ -6,9 +6,17 @@ import {
   useTransform,
   type MotionValue,
 } from 'framer-motion'
+import panamburBeachImg from './assets/Panamburbeach.jpg'
+import kadriManjunathImg from './assets/kadrimanjunath.jpeg'
+import pilikulaNisargadhamaImg from './assets/pilikulanisargadhama.webp'
+import stAloysiusChapelImg from './assets/Staloysiuschampel.png'
+import sulthanBatteryImg from './assets/SulthanBattery.jpeg'
+import tannirbhaviBeachImg from './assets/Thannirbhavibeach.jpg'
+import exploreBgVideo from './assets/vediobackground.mp4'
 
 interface ExplorePhoto {
   label: string
+  image: string
   top: string
   left: string
   rotate: number
@@ -18,12 +26,12 @@ interface ExplorePhoto {
 }
 
 const explorePhotos: ExplorePhoto[] = [
-  { label: 'Panambur Beach', top: '3%', left: '72%', rotate: -6, width: 145, travel: 1300, range: [0, 1] },
-  { label: 'Kadri Manjunath Temple', top: '12%', left: '14%', rotate: 5, width: 125, travel: 1380, range: [0, 1] },
-  { label: 'Pilikula Nisargadhama', top: '33%', left: '82%', rotate: 4, width: 130, travel: 1450, range: [0, 1] },
-  { label: 'St. Aloysius Chapel', top: '35%', left: '6%', rotate: -4, width: 125, travel: 1480, range: [0, 1] },
-  { label: 'Tannirbhavi Beach', top: '64%', left: '68%', rotate: -8, width: 115, travel: 1220, range: [0, 1] },
-  { label: 'Sultan Battery', top: '65%', left: '18%', rotate: 6, width: 110, travel: 1300, range: [0, 1] },
+  { label: 'Panambur Beach', image: panamburBeachImg, top: '3%', left: '72%', rotate: -6, width: 145, travel: 1300, range: [0, 1] },
+  { label: 'Kadri Manjunath Temple', image: kadriManjunathImg, top: '12%', left: '14%', rotate: 5, width: 125, travel: 1380, range: [0, 1] },
+  { label: 'Pilikula Nisargadhama', image: pilikulaNisargadhamaImg, top: '33%', left: '82%', rotate: 4, width: 130, travel: 1450, range: [0, 1] },
+  { label: 'St. Aloysius Chapel', image: stAloysiusChapelImg, top: '35%', left: '6%', rotate: -4, width: 125, travel: 1480, range: [0, 1] },
+  { label: 'Tannirbhavi Beach', image: tannirbhaviBeachImg, top: '64%', left: '68%', rotate: -8, width: 115, travel: 1220, range: [0, 1] },
+  { label: 'Sultan Battery', image: sulthanBatteryImg, top: '65%', left: '18%', rotate: 6, width: 110, travel: 1300, range: [0, 1] },
 ]
 
 interface ExplorePhotoCardProps {
@@ -45,6 +53,8 @@ function ExplorePhotoCard({ photo, progress }: ExplorePhotoCardProps) {
         x,
       }}
     >
+      <img className="explore__photo-img" src={photo.image} alt={photo.label} loading="lazy" />
+      <div className="explore__photo-scrim" />
       <span className="explore__photo-label">{photo.label}</span>
     </motion.div>
   )
@@ -80,6 +90,17 @@ export function ExploreSection() {
   return (
     <section className="explore" ref={sectionRef}>
       <div className="explore__sticky">
+        <video
+          className="explore__bg-video"
+          src={exploreBgVideo}
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="auto"
+        />
+        <div className="explore__bg-overlay" />
+
         <div className="explore__photos">
           {explorePhotos.map((photo) => (
             <ExplorePhotoCard key={photo.label} photo={photo} progress={smoothProgress} />
