@@ -16,8 +16,6 @@ import { GallerySection } from './GallerySection'
 import { ContactSection } from './ContactSection'
 import './App.css'
 
-const navLinks = ['Rooms', 'The Hotel', 'Dining', 'Gallery', 'Mangalore Offers']
-
 const promoItems = [
   'Best Price Guaranteed',
   'Free Cancellation 48H',
@@ -72,22 +70,6 @@ function App() {
           playsInline
         />
         <div className="hero__overlay" />
-
-        <header className="hero__nav">
-          <nav className="hero__nav-left">
-            {navLinks.map((link) => (
-              <a key={link} href="#">
-                {link}
-              </a>
-            ))}
-          </nav>
-          <nav className="hero__nav-right">
-            <a href="#">Contact</a>
-            <button type="button" className="hero__menu-btn">
-              Menu
-            </button>
-          </nav>
-        </header>
 
         <div className="hero__content">
           <img src={logo} className="hero__logo" alt="Radiance by Hotel Roopa" />

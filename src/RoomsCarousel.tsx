@@ -72,10 +72,7 @@ export function RoomsCarousel({ rooms }: RoomsCarouselProps) {
             ref={groupIndex === 0 ? groupRef : undefined}
           >
             {rooms.map((room, i) => (
-              <div
-                key={`${groupIndex}-${room.name}-${i}`}
-                className={`rooms__card rooms__card--pos${i}`}
-              >
+              <div key={`${groupIndex}-${room.name}-${i}`} className="rooms__card">
                 <div className="rooms__card-image">
                   <img
                     className="rooms__card-photo"

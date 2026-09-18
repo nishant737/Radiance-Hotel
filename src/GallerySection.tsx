@@ -1,4 +1,4 @@
-import { useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { motion, useMotionValue, useAnimationFrame, animate } from 'framer-motion'
 import deluxeRoomImg from './assets/Deluxeroom.jpg'
 import summerSuiteImg from './assets/Summersuite.jpg'
@@ -34,6 +34,22 @@ export function GallerySection() {
   const x = useMotionValue(0)
   const paused = useRef(false)
   const resumeTimeout = useRef<ReturnType<typeof setTimeout> | undefined>(undefined)
+  const [activeItem, setActiveItem] = useState<GalleryItem | null>(null)
+
+  useEffect(() => {
+    if (!activeItem) return
+    paused.current = true
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setActiveItem(null)
+    }
+    window.addEventListener('keydown', onKeyDown)
+    return () => window.removeEventListener('keydown', onKeyDown)
+  }, [activeItem])
+
+  const closeLightbox = () => {
+    setActiveItem(null)
+    paused.current = false
+  }
 
   useAnimationFrame((_, delta) => {
     if (paused.current) return
@@ -100,7 +116,16 @@ export function GallerySection() {
               ref={groupIndex === 0 ? groupRef : undefined}
             >
               {galleryItems.map((item, i) => (
-                <div className="gallery__card" key={`${groupIndex}-${item.title}-${i}`}>
+                <div
+                  className="gallery__card"
+                  key={`${groupIndex}-${item.title}-${i}`}
+                  onClick={() => setActiveItem(item)}
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') setActiveItem(item)
+                  }}
+                >
                   {item.video ? (
                     <video
                       className="gallery__card-img"
@@ -125,9 +150,6 @@ export function GallerySection() {
                   <div className="gallery__card-scrim" />
                   <p className="gallery__card-category">{item.category}</p>
                   <h3 className="gallery__card-title">{item.title}</h3>
-                  <button type="button" className="gallery__card-btn">
-                    Learn More
-                  </button>
                 </div>
               ))}
             </div>
@@ -153,6 +175,50 @@ export function GallerySection() {
           ›
         </button>
       </div>
+
+      {activeItem && (
+        <div
+          className="gallery__lightbox"
+          role="dialog"
+          aria-modal="true"
+          aria-label={activeItem.title}
+          onClick={closeLightbox}
+        >
+          <button
+            type="button"
+            className="gallery__lightbox-close"
+            aria-label="Close"
+            onClick={closeLightbox}
+          >
+            ×
+          </button>
+          <div
+            className="gallery__lightbox-content"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {activeItem.video ? (
+              <video
+                className="gallery__lightbox-media"
+                src={activeItem.video}
+                autoPlay
+                loop
+                controls
+                playsInline
+              />
+            ) : (
+              <img
+                className="gallery__lightbox-media"
+                src={activeItem.image}
+                alt={activeItem.title}
+              />
+            )}
+            <div className="gallery__lightbox-caption">
+              <p className="gallery__lightbox-category">{activeItem.category}</p>
+              <h3 className="gallery__lightbox-title">{activeItem.title}</h3>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   )
 }
