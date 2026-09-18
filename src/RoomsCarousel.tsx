@@ -1,4 +1,4 @@
-import { useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { motion, useMotionValue, useAnimationFrame, animate } from 'framer-motion'
 
 interface Room {
@@ -12,13 +12,14 @@ interface RoomsCarouselProps {
 
 const AUTO_SPEED = 40 // px per second
 const RESUME_DELAY = 900 // ms after manual nav before auto-scroll resumes
-const FALLBACK_STEP = 262 // card width (230) + gap (32)
+const FALLBACK_STEP = 452 // card width (420) + gap (32)
 
 export function RoomsCarousel({ rooms }: RoomsCarouselProps) {
   const groupRef = useRef<HTMLDivElement>(null)
   const x = useMotionValue(0)
   const paused = useRef(false)
   const resumeTimeout = useRef<ReturnType<typeof setTimeout> | undefined>(undefined)
+  const [activeRoom, setActiveRoom] = useState<Room | null>(null)
 
   useAnimationFrame((_, delta) => {
     if (paused.current) return
@@ -28,6 +29,21 @@ export function RoomsCarousel({ rooms }: RoomsCarouselProps) {
     if (next <= -groupWidth) next += groupWidth
     x.set(next)
   })
+
+  useEffect(() => {
+    if (!activeRoom) return
+    paused.current = true
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setActiveRoom(null)
+    }
+    window.addEventListener('keydown', onKeyDown)
+    return () => window.removeEventListener('keydown', onKeyDown)
+  }, [activeRoom])
+
+  const closeLightbox = () => {
+    setActiveRoom(null)
+    paused.current = false
+  }
 
   const slide = (direction: 1 | -1) => {
     const groupWidth = groupRef.current?.scrollWidth ?? 0
@@ -72,7 +88,16 @@ export function RoomsCarousel({ rooms }: RoomsCarouselProps) {
             ref={groupIndex === 0 ? groupRef : undefined}
           >
             {rooms.map((room, i) => (
-              <div key={`${groupIndex}-${room.name}-${i}`} className="rooms__card">
+              <div
+                key={`${groupIndex}-${room.name}-${i}`}
+                className="rooms__card"
+                onClick={() => setActiveRoom(room)}
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') setActiveRoom(room)
+                }}
+              >
                 <div className="rooms__card-image">
                   <img
                     className="rooms__card-photo"
@@ -81,9 +106,6 @@ export function RoomsCarousel({ rooms }: RoomsCarouselProps) {
                     loading="lazy"
                   />
                   <div className="rooms__card-scrim" />
-                  <button type="button" className="rooms__card-more">
-                    Show More
-                  </button>
                 </div>
                 <p className="rooms__card-name">{room.name}</p>
               </div>
@@ -110,6 +132,29 @@ export function RoomsCarousel({ rooms }: RoomsCarouselProps) {
           ›
         </button>
       </div>
+
+      {activeRoom && (
+        <div
+          className="rooms__lightbox"
+          role="dialog"
+          aria-modal="true"
+          aria-label={activeRoom.name}
+          onClick={closeLightbox}
+        >
+          <button
+            type="button"
+            className="rooms__lightbox-close"
+            aria-label="Close"
+            onClick={closeLightbox}
+          >
+            ×
+          </button>
+          <div className="rooms__lightbox-content" onClick={(e) => e.stopPropagation()}>
+            <img className="rooms__lightbox-media" src={activeRoom.image} alt={activeRoom.name} />
+            <h3 className="rooms__lightbox-title">{activeRoom.name}</h3>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

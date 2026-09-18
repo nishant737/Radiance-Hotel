@@ -14,6 +14,8 @@ import sulthanBatteryImg from './assets/SulthanBattery.jpeg'
 import tannirbhaviBeachImg from './assets/Thannirbhavibeach.jpg'
 import exploreBgVideo from './assets/vediobackground.mp4'
 
+const INSTAGRAM_URL = 'https://www.instagram.com/radiancehotels/?hl=en'
+
 interface ExplorePhoto {
   label: string
   image: string
@@ -112,10 +114,15 @@ export function ExploreSection() {
             Mangalore is a feeling. Discover the coastal moments that make
             every stay unforgettable.
           </p>
-          <button type="button" className="explore__cta">
+          <a
+            className="explore__cta"
+            href={INSTAGRAM_URL}
+            target="_blank"
+            rel="noreferrer"
+          >
             <InstagramIcon />
             Mangalore Offers
-          </button>
+          </a>
         </div>
       </div>
     </section>

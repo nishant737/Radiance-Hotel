@@ -571,18 +571,23 @@
 .rooms__card {
   position: relative;
   flex-shrink: 0;
-  width: 230px;
+  width: 420px;
+  cursor: pointer;
   transition: transform 0.35s ease;
 
   &:hover {
     transform: translateY(-8px);
+  }
+
+  @media (max-width: 700px) {
+    width: 300px;
   }
 }
 
 .rooms__card-image {
   position: relative;
   width: 100%;
-  aspect-ratio: 3 / 4;
+  aspect-ratio: 3 / 2;
   border-radius: 6px;
   overflow: hidden;
   background:
@@ -616,17 +621,21 @@
 .rooms__card-name {
   position: absolute;
   left: 16px;
-  bottom: 38px;
+  bottom: 16px;
   z-index: 1;
   margin: 0;
   max-width: calc(100% - 32px);
   font-family: var(--heading);
   font-style: italic;
   font-weight: 500;
-  font-size: 19px;
+  font-size: 24px;
   color: #fff;
   text-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
   pointer-events: none;
+
+  @media (max-width: 700px) {
+    font-size: 19px;
+  }
 }
 
 .rooms__card-scrim {
@@ -648,42 +657,69 @@
   }
 }
 
-.rooms__card-more {
-  position: absolute;
-  left: 16px;
-  bottom: 13px;
-  z-index: 1;
-  padding: 4px 10px;
-  border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.75);
-  background: rgba(20, 8, 8, 0.35);
-  color: #fff;
-  font-family: var(--sans);
-  font-size: 8.5px;
-  font-weight: 600;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
-  white-space: nowrap;
-  cursor: pointer;
-  opacity: 0;
-  transform: translateY(8px);
-  transition:
-    opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
-    background 0.2s ease;
-  pointer-events: none;
+.rooms__lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  background: rgba(10, 4, 4, 0.85);
+  animation: gallery-lightbox-fade 0.25s ease;
 
-  .rooms__card:hover & {
-    opacity: 1;
-    transform: translateY(0);
-    pointer-events: auto;
-    transition-delay: 0.08s;
+  @media (max-width: 700px) {
+    padding: 20px;
   }
+}
+
+.rooms__lightbox-close {
+  position: fixed;
+  top: 24px;
+  right: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12);
+  color: var(--cream);
+  font-size: 26px;
+  line-height: 1;
+  cursor: pointer;
+  transition: background 0.2s ease;
 
   &:hover {
-    background: var(--maroon);
-    border-color: var(--maroon);
+    background: rgba(255, 255, 255, 0.24);
   }
+}
+
+.rooms__lightbox-content {
+  position: relative;
+  max-width: min(1000px, 100%);
+  max-height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.rooms__lightbox-media {
+  max-width: 100%;
+  max-height: 78svh;
+  border-radius: 12px;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+  object-fit: contain;
+}
+
+.rooms__lightbox-title {
+  margin: 20px 0 0;
+  font-family: var(--heading);
+  font-style: italic;
+  font-weight: 500;
+  font-size: 22px;
+  color: var(--cream);
 }
 
 .journey {
@@ -998,6 +1034,7 @@
   font-weight: 600;
   letter-spacing: 1px;
   text-transform: uppercase;
+  text-decoration: none;
   cursor: pointer;
   transition: background 0.25s;
 
@@ -1137,12 +1174,14 @@
     linear-gradient(160deg, var(--peach) 0%, var(--gold) 45%, var(--charcoal) 135%);
   box-shadow: 0 20px 44px rgba(43, 26, 20, 0.28);
   transition:
-    transform 0.4s ease,
-    box-shadow 0.4s ease;
+    transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.35s ease;
 
-  &:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 30px 60px rgba(43, 26, 20, 0.4);
+  &:hover,
+  &:focus-visible {
+    transform: translateY(-16px) scale(1.03);
+    box-shadow: 0 34px 64px rgba(43, 26, 20, 0.45);
+    z-index: 1;
   }
 
   @media (max-width: 700px) {
@@ -1159,6 +1198,12 @@
   height: 100%;
   object-fit: cover;
   object-position: center;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+
+  .gallery__card:hover &,
+  .gallery__card:focus-visible & {
+    transform: scale(1.1);
+  }
 }
 
 .gallery__card-scrim {

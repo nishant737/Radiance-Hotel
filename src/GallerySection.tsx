@@ -7,6 +7,8 @@ import premiumSuiteImg from './assets/Premimumsuite.jpg'
 import familySuiteImg from './assets/Familysuite.jpg'
 import radianceTourVideo from './assets/RadianceHotelTour.mp4'
 import radianceWelcomeVideo from './assets/3radiance.mp4'
+import radianceBuildVideo from './assets/finaled.mp4'
+import businessTripVideo from './assets/BusinessTrip.mp4'
 
 interface GalleryItem {
   category: string
@@ -17,10 +19,12 @@ interface GalleryItem {
 
 const galleryItems: GalleryItem[] = [
   { category: 'Video', title: 'A Stay Worth Remembering', video: radianceTourVideo },
-  { category: 'Experience', title: 'From Warm Welcomes To Everyday Comforts', video: radianceWelcomeVideo },
   { category: 'Rooms', title: 'Deluxe Room: Comfort Refined For Every Stay', image: deluxeRoomImg },
+  { category: 'Experience', title: 'From Warm Welcomes To Everyday Comforts', video: radianceWelcomeVideo },
   { category: 'Suites', title: 'Executive Suite: Space And Style For Business Stays', image: executiveSuiteImg },
+  { category: 'Our Story', title: 'Built With Care, Reimagined For You', video: radianceBuildVideo },
   { category: 'Family', title: 'Family Suite: Room To Relax, Together', image: familySuiteImg },
+  { category: 'Business Stay', title: 'Back Before You Know It', video: businessTripVideo },
   { category: 'Luxury', title: 'Premium Suite: Indulgent Comfort, Elevated Living', image: premiumSuiteImg },
   { category: 'Suites', title: 'Summer Suite: Bright, Airy, Effortlessly Elegant', image: summerSuiteImg },
 ]
