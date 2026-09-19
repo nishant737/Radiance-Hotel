@@ -55,11 +55,17 @@ export function GallerySection() {
     paused.current = false
   }
 
+  const speedFactor = useRef(1)
+  const sliding = useRef(false)
+
   useAnimationFrame((_, delta) => {
-    if (paused.current) return
+    if (sliding.current) return
+    const target = paused.current ? 0 : 1
+    speedFactor.current += (target - speedFactor.current) * Math.min(1, delta / 250)
+    if (speedFactor.current < 0.001) return
     const groupWidth = groupRef.current?.scrollWidth ?? 0
     if (!groupWidth) return
-    let next = x.get() - (AUTO_SPEED * delta) / 1000
+    let next = x.get() - (AUTO_SPEED * speedFactor.current * delta) / 1000
     if (next <= -groupWidth) next += groupWidth
     x.set(next)
   })
@@ -71,6 +77,7 @@ export function GallerySection() {
     const step = card ? card.offsetWidth + 28 : FALLBACK_STEP
 
     paused.current = true
+    sliding.current = true
     if (resumeTimeout.current) clearTimeout(resumeTimeout.current)
 
     const target = x.get() - direction * step
@@ -82,6 +89,8 @@ export function GallerySection() {
         while (normalized <= -groupWidth) normalized += groupWidth
         while (normalized > 0) normalized -= groupWidth
         x.set(normalized)
+        sliding.current = false
+        speedFactor.current = 0
         resumeTimeout.current = setTimeout(() => {
           paused.current = false
           resumeTimeout.current = undefined
@@ -100,10 +109,6 @@ export function GallerySection() {
             stay at Radiance.
           </h2>
         </div>
-        <button type="button" className="gallery__cta">
-          See More Gallery
-          <span className="gallery__cta-arrow">→</span>
-        </button>
       </div>
 
       <div
@@ -208,6 +213,7 @@ export function GallerySection() {
                 loop
                 controls
                 playsInline
+                preload="auto"
               />
             ) : (
               <img

@@ -3,6 +3,7 @@
   width: 100%;
   height: 100svh;
   overflow: hidden;
+  background: #140808 url('/hero-poster.jpg') center / cover no-repeat;
   color: var(--cream);
   font-family: var(--sans);
 }
@@ -95,7 +96,7 @@
   background: var(--cream);
   border-radius: 8px;
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.28);
-  overflow: hidden;
+  
   opacity: 1;
   animation: hero-booking-pop-in 1.6s cubic-bezier(0.16, 1, 0.3, 1) 0.6s
     backwards;
@@ -197,6 +198,7 @@
 }
 
 .hero__booking-field {
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -237,6 +239,7 @@
 }
 
 .hero__booking-submit {
+  border-radius: 0 8px 8px 0;
   border: none;
   background: var(--maroon);
   color: var(--cream);
@@ -257,6 +260,7 @@
   @media (max-width: 700px) {
     grid-column: 1 / -1;
     padding: 16px;
+    border-radius: 8px;
   }
 }
 
@@ -669,7 +673,7 @@
   animation: gallery-lightbox-fade 0.25s ease;
 
   @media (max-width: 700px) {
-    padding: 20px;
+    padding: 84px 16px 24px;
   }
 }
 
@@ -684,7 +688,9 @@
   height: 44px;
   border: none;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.12);
+  z-index: 2;
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.35);
   color: var(--cream);
   font-size: 26px;
   line-height: 1;
@@ -711,6 +717,10 @@
   border-radius: 12px;
   box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
   object-fit: contain;
+
+  @media (max-width: 700px) {
+    max-height: calc(100svh - 230px);
+  }
 }
 
 .rooms__lightbox-title {
@@ -802,7 +812,7 @@
 
 .journey__list {
   list-style: none;
-  margin: 0 0 40px;
+  margin: 0;
   padding: 0;
   border-top: 1px solid var(--border);
 }
@@ -842,43 +852,13 @@
   opacity: 1;
 }
 
-.journey__cta {
-  align-self: flex-start;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 16px 26px;
-  border-radius: 999px;
-  border: none;
-  background: var(--maroon);
-  color: var(--cream);
-  font-family: var(--sans);
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  cursor: pointer;
-  box-shadow: 0 12px 28px rgba(43, 26, 20, 0.3);
-  transition:
-    background 0.25s,
-    transform 0.25s;
-
-  &:hover {
-    background: #33150f;
-  }
-}
-
-.journey__cta-arrow {
-  font-size: 15px;
-}
-
 .explore {
   position: relative;
   height: 220vh;
   background: var(--charcoal);
 
   @media (max-width: 900px) {
-    height: auto;
+    height: 260svh;
   }
 }
 
@@ -892,9 +872,8 @@
   justify-content: center;
 
   @media (max-width: 900px) {
-    position: relative;
-    height: auto;
-    padding: 96px 24px;
+    box-sizing: border-box;
+    padding: 0 24px;
   }
 }
 
@@ -936,14 +915,12 @@
   position: absolute;
   inset: 0;
   z-index: 3;
-
-  @media (max-width: 900px) {
-    display: none;
-  }
+  pointer-events: none;
 }
 
 .explore__photo {
   position: absolute;
+  will-change: transform;
   box-sizing: border-box;
   aspect-ratio: 3 / 4;
   border-radius: 8px;
@@ -1103,36 +1080,6 @@
   }
 }
 
-.gallery__cta {
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 16px 26px;
-  border-radius: 999px;
-  border: none;
-  background: var(--maroon);
-  color: var(--cream);
-  font-family: var(--sans);
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  cursor: pointer;
-  box-shadow: 0 12px 28px rgba(43, 26, 20, 0.3);
-  transition:
-    background 0.25s,
-    transform 0.25s;
-
-  &:hover {
-    background: #33150f;
-  }
-}
-
-.gallery__cta-arrow {
-  font-size: 15px;
-}
-
 .gallery__track {
   position: relative;
   overflow: hidden;
@@ -1173,16 +1120,6 @@
     ),
     linear-gradient(160deg, var(--peach) 0%, var(--gold) 45%, var(--charcoal) 135%);
   box-shadow: 0 20px 44px rgba(43, 26, 20, 0.28);
-  transition:
-    transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
-    box-shadow 0.35s ease;
-
-  &:hover,
-  &:focus-visible {
-    transform: translateY(-16px) scale(1.03);
-    box-shadow: 0 34px 64px rgba(43, 26, 20, 0.45);
-    z-index: 1;
-  }
 
   @media (max-width: 700px) {
     width: 300px;
@@ -1198,12 +1135,6 @@
   height: 100%;
   object-fit: cover;
   object-position: center;
-  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-
-  .gallery__card:hover &,
-  .gallery__card:focus-visible & {
-    transform: scale(1.1);
-  }
 }
 
 .gallery__card-scrim {
@@ -1290,7 +1221,7 @@
   animation: gallery-lightbox-fade 0.25s ease;
 
   @media (max-width: 700px) {
-    padding: 20px;
+    padding: 84px 16px 24px;
   }
 }
 
@@ -1314,7 +1245,9 @@
   height: 44px;
   border: none;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.12);
+  z-index: 2;
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.35);
   color: var(--cream);
   font-size: 26px;
   line-height: 1;
@@ -1341,6 +1274,10 @@
   border-radius: 12px;
   box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
   object-fit: contain;
+
+  @media (max-width: 700px) {
+    max-height: calc(100svh - 230px);
+  }
 }
 
 .gallery__lightbox-caption {
@@ -1532,3 +1469,126 @@
 }
 
 
+
+.hero__date-btn {
+  padding: 0;
+  border: none;
+  background: none;
+  text-align: left;
+  font-family: inherit;
+  font-size: 13px;
+  color: var(--charcoal);
+  cursor: pointer;
+}
+
+.hero__date-btn--empty {
+  color: rgba(51, 51, 51, 0.4);
+}
+
+.hero__calendar {
+  position: absolute;
+  bottom: calc(100% + 14px);
+  left: 0;
+  z-index: 60;
+  width: 300px;
+  box-sizing: border-box;
+  padding: 16px;
+  border-radius: 12px;
+  background: var(--cream);
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.35);
+  animation: hero-calendar-pop 0.2s ease;
+
+  @media (max-width: 700px) {
+    position: static;
+    width: 100%;
+    margin-top: 10px;
+    box-shadow: none;
+    border: 1px solid var(--border);
+  }
+}
+
+@keyframes hero-calendar-pop {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero__calendar-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.hero__calendar-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--maroon);
+}
+
+.hero__calendar-nav {
+  width: 30px;
+  height: 30px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(75, 31, 31, 0.08);
+  color: var(--maroon);
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+
+  &:disabled {
+    opacity: 0.3;
+    cursor: default;
+  }
+}
+
+.hero__calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+  text-align: center;
+}
+
+.hero__calendar-weekday {
+  padding: 4px 0;
+  font-size: 10px;
+  letter-spacing: 0.5px;
+  color: rgba(75, 31, 31, 0.55);
+}
+
+.hero__calendar-empty {
+  aspect-ratio: 1;
+}
+
+.hero__calendar-day {
+  aspect-ratio: 1;
+  border: none;
+  border-radius: 50%;
+  background: none;
+  font-family: inherit;
+  font-size: 13px;
+  color: var(--charcoal);
+  cursor: pointer;
+  transition: background 0.15s ease;
+
+  &:hover:not(:disabled) {
+    background: rgba(75, 31, 31, 0.12);
+  }
+
+  &:disabled {
+    color: rgba(51, 51, 51, 0.25);
+    cursor: default;
+  }
+}
+
+.hero__calendar-day--selected,
+.hero__calendar-day--selected:hover:not(:disabled) {
+  background: var(--maroon);
+  color: var(--cream);
+}

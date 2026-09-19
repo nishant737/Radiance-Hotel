@@ -1,4 +1,4 @@
-import { useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import {
   motion,
   useScroll,
@@ -39,10 +39,13 @@ const explorePhotos: ExplorePhoto[] = [
 interface ExplorePhotoCardProps {
   photo: ExplorePhoto
   progress: MotionValue<number>
+  isMobile: boolean
+  viewportWidth: number
 }
 
-function ExplorePhotoCard({ photo, progress }: ExplorePhotoCardProps) {
-  const x = useTransform(progress, photo.range, [photo.travel, -photo.travel])
+function ExplorePhotoCard({ photo, progress, isMobile, viewportWidth }: ExplorePhotoCardProps) {
+  const travel = isMobile ? viewportWidth * (photo.travel / 1300) * 1.25 : photo.travel
+  const x = useTransform(progress, photo.range, [travel, -travel])
 
   return (
     <motion.div
@@ -50,7 +53,7 @@ function ExplorePhotoCard({ photo, progress }: ExplorePhotoCardProps) {
       style={{
         top: photo.top,
         left: photo.left,
-        width: photo.width,
+        width: isMobile ? Math.round(photo.width * 0.82) : photo.width,
         rotate: photo.rotate,
         x,
       }}
@@ -77,8 +80,19 @@ function InstagramIcon() {
   )
 }
 
+const MOBILE_QUERY = 900
+
 export function ExploreSection() {
   const sectionRef = useRef<HTMLElement>(null)
+  const [viewportWidth, setViewportWidth] = useState(() => window.innerWidth)
+  const isMobile = viewportWidth <= MOBILE_QUERY
+
+  useEffect(() => {
+    const onResize = () => setViewportWidth(window.innerWidth)
+    window.addEventListener('resize', onResize)
+    return () => window.removeEventListener('resize', onResize)
+  }, [])
+
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ['start start', 'end end'],
@@ -105,7 +119,13 @@ export function ExploreSection() {
 
         <div className="explore__photos">
           {explorePhotos.map((photo) => (
-            <ExplorePhotoCard key={photo.label} photo={photo} progress={smoothProgress} />
+            <ExplorePhotoCard
+              key={photo.label}
+              photo={photo}
+              progress={smoothProgress}
+              isMobile={isMobile}
+              viewportWidth={viewportWidth}
+            />
           ))}
         </div>
 

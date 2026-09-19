@@ -14,6 +14,7 @@ import { JourneySection } from './JourneySection'
 import { ExploreSection } from './ExploreSection'
 import { GallerySection } from './GallerySection'
 import { ContactSection } from './ContactSection'
+import { DatePicker } from './DatePicker'
 import './App.css'
 
 const promoItems = [
@@ -27,11 +28,15 @@ const roopaParagraphs = [
 ]
 
 const roomCards = [
-  { name: 'Deluxe Room', image: deluxeRoomImg },
-  { name: 'Summer Suite', image: summerSuiteImg },
+  { name: 'Superior King', image: deluxeRoomImg },
+  { name: 'Superior Queen', image: summerSuiteImg },
+  { name: 'Superior Twin', image: familySuiteImg },
+  { name: 'Premiere King', image: premiumSuiteImg },
+  { name: 'Premiere Queen', image: deluxeRoomImg },
+  { name: 'Premiere Twin', image: summerSuiteImg },
+  { name: 'Junior Suite', image: familySuiteImg },
   { name: 'Executive Suite', image: executiveSuiteImg },
-  { name: 'Premium Suite', image: premiumSuiteImg },
-  { name: 'Family Suite', image: familySuiteImg },
+  { name: 'Presidential Suite', image: premiumSuiteImg },
 ]
 
 const fadeUp = {
@@ -45,6 +50,10 @@ const fadeUp = {
 
 function App() {
   const [isBookingOpen, setIsBookingOpen] = useState(false)
+  const [checkIn, setCheckIn] = useState('')
+  const [checkOut, setCheckOut] = useState('')
+  const today = new Date().toISOString().slice(0, 10)
+
 
   const handleReserveClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     if (!isBookingOpen && window.matchMedia('(max-width: 700px)').matches) {
@@ -64,6 +73,8 @@ function App() {
         <video
           className="hero__video"
           src={heroVideo}
+          poster="/hero-poster.jpg"
+          preload="auto"
           autoPlay
           muted
           loop
@@ -95,14 +106,21 @@ function App() {
             ×
           </button>
           <div className="hero__booking-fields">
-            <label className="hero__booking-field">
-              <span>Check-in</span>
-              <input type="text" placeholder="Add date" />
-            </label>
-            <label className="hero__booking-field">
-              <span>Check-out</span>
-              <input type="text" placeholder="Add date" />
-            </label>
+            <DatePicker
+              label="Check-in"
+              value={checkIn}
+              min={today}
+              onChange={(v) => {
+                setCheckIn(v)
+                if (checkOut && v >= checkOut) setCheckOut('')
+              }}
+            />
+            <DatePicker
+              label="Check-out"
+              value={checkOut}
+              min={checkIn || today}
+              onChange={setCheckOut}
+            />
             <label className="hero__booking-field">
               <span>Guests</span>
               <input type="text" placeholder="Add guests" />

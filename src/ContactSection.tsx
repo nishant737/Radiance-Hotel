@@ -2,7 +2,10 @@ const MAPS_QUERY = 'Radiance by Hotel Roopa, Mangalore, Karnataka'
 const MAPS_EMBED_SRC = `https://www.google.com/maps?q=${encodeURIComponent(MAPS_QUERY)}&output=embed`
 const MAPS_LINK = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(MAPS_QUERY)}`
 
-const EMAIL = 'radiancebyhotelroopa@gmail.com'
+const EMAILS = [
+  'info@radiancehotels.com',
+  'reservations@radiancehotels.com',
+]
 const WHATSAPP_NUMBER = '919187983771'
 const WHATSAPP_DISPLAY = '+91 91879 83771'
 const INSTAGRAM_URL = 'https://www.instagram.com/radiancehotels/?hl=en'
@@ -70,9 +73,11 @@ export function ContactSection() {
           </a>
 
           <div className="contact__details">
-            <a className="contact__detail-link" href={`mailto:${EMAIL}`}>
-              {EMAIL}
-            </a>
+            {EMAILS.map((email) => (
+              <a key={email} className="contact__detail-link" href={`mailto:${email}`}>
+                {email}
+              </a>
+            ))}
             <a className="contact__detail-link" href={`tel:+${WHATSAPP_NUMBER}`}>
               {WHATSAPP_DISPLAY}
             </a>

@@ -31,11 +31,6 @@ export function JourneySection() {
             </li>
           ))}
         </ul>
-
-        <button type="button" className="journey__cta">
-          More About The Hotel
-          <span className="journey__cta-arrow">→</span>
-        </button>
       </div>
     </section>
   )
