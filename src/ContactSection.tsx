@@ -55,7 +55,7 @@ export function ContactSection() {
           <h2 className="contact__title">Radiance by Hotel Roopa</h2>
 
           <address className="contact__address">
-            Hotel Roopa Building, Balmatta Road,
+            Balmatta Rd,
             <br />
             Hampankatta, Mangaluru,
             <br />

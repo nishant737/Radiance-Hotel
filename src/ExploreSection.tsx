@@ -84,7 +84,9 @@ const MOBILE_QUERY = 900
 
 export function ExploreSection() {
   const sectionRef = useRef<HTMLElement>(null)
-  const [viewportWidth, setViewportWidth] = useState(() => window.innerWidth)
+  const [viewportWidth, setViewportWidth] = useState(() =>
+    typeof window !== 'undefined' ? window.innerWidth : 1280,
+  )
   const isMobile = viewportWidth <= MOBILE_QUERY
 
   useEffect(() => {

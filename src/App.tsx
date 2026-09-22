@@ -87,6 +87,9 @@ function App() {
         <div className="hero__overlay" />
 
         <div className="hero__content">
+          <h1 className="sr-only">
+            Radiance by Hotel Roopa — Boutique Hotel in Mangalore, Karnataka
+          </h1>
           <img src={logo} className="hero__logo" alt="Radiance by Hotel Roopa" />
         </div>
 
