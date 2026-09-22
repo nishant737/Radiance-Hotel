@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from 'react'
 import { motion, useMotionValue, useAnimationFrame, animate } from 'framer-motion'
-import deluxeRoomImg from './assets/Deluxeroom.jpg'
-import summerSuiteImg from './assets/Summersuite.jpg'
-import executiveSuiteImg from './assets/Executivesuite.jpg'
-import premiumSuiteImg from './assets/Premimumsuite.jpg'
-import familySuiteImg from './assets/Familysuite.jpg'
+import galleryBathroomImg from './assets/rooms/web/GalleryBathroom.jpg'
+import galleryBedArmchairImg from './assets/rooms/web/GalleryBedArmchair.jpg'
+import galleryWardrobeImg from './assets/rooms/web/GalleryWardrobe.jpg'
+import galleryFullRoomImg from './assets/rooms/web/GalleryFullRoom.jpg'
+import galleryNookImg from './assets/rooms/web/GalleryNook.jpg'
 import radianceTourVideo from './assets/RadianceHotelTour.mp4'
 import radianceWelcomeVideo from './assets/3radiance.mp4'
 import radianceBuildVideo from './assets/finaled.mp4'
@@ -19,14 +19,14 @@ interface GalleryItem {
 
 const galleryItems: GalleryItem[] = [
   { category: 'Video', title: 'A Stay Worth Remembering', video: radianceTourVideo },
-  { category: 'Rooms', title: 'Deluxe Room: Comfort Refined For Every Stay', image: deluxeRoomImg },
+  { category: 'Interiors', title: 'A Room That Feels Like Yours', image: galleryFullRoomImg },
   { category: 'Experience', title: 'From Warm Welcomes To Everyday Comforts', video: radianceWelcomeVideo },
-  { category: 'Suites', title: 'Executive Suite: Space And Style For Business Stays', image: executiveSuiteImg },
+  { category: 'Comfort', title: 'Every Detail, Thoughtfully Placed', image: galleryBedArmchairImg },
   { category: 'Our Story', title: 'Built With Care, Reimagined For You', video: radianceBuildVideo },
-  { category: 'Family', title: 'Family Suite: Room To Relax, Together', image: familySuiteImg },
+  { category: 'Space', title: 'Room To Unpack And Settle In', image: galleryWardrobeImg },
   { category: 'Business Stay', title: 'Back Before You Know It', video: businessTripVideo },
-  { category: 'Luxury', title: 'Premium Suite: Indulgent Comfort, Elevated Living', image: premiumSuiteImg },
-  { category: 'Suites', title: 'Summer Suite: Bright, Airy, Effortlessly Elegant', image: summerSuiteImg },
+  { category: 'Bathrooms', title: 'Spa-Style Comfort In Every Bathroom', image: galleryBathroomImg },
+  { category: 'Relax', title: 'A Quiet Corner To Unwind', image: galleryNookImg },
 ]
 
 const AUTO_SPEED = 40 // px per second

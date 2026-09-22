@@ -3,11 +3,15 @@ import { motion } from 'framer-motion'
 import logo from './assets/logo-white.png'
 import heroVideo from './assets/radianceherosection.mp4'
 import roopaImg from './assets/about.jpeg'
-import deluxeRoomImg from './assets/Deluxeroom.jpg'
-import summerSuiteImg from './assets/Summersuite.jpg'
-import executiveSuiteImg from './assets/Executivesuite.jpg'
-import premiumSuiteImg from './assets/Premimumsuite.jpg'
-import familySuiteImg from './assets/Familysuite.jpg'
+import superiorKingImg from './assets/rooms/web/SuperiorKing.jpg'
+import superiorQueenImg from './assets/rooms/web/SuperiorQueen.jpg'
+import superiorTwinImg from './assets/rooms/web/SuperiorTwin.jpg'
+import premiereKingImg from './assets/rooms/web/PremiereKing.jpg'
+import premiereQueenImg from './assets/rooms/web/PremiereQueen.jpg'
+import premiereTwinImg from './assets/rooms/web/PremiereTwin.jpg'
+import juniorSuiteImg from './assets/rooms/web/JuniorSuite.jpg'
+import executiveSuiteImg from './assets/rooms/web/ExecutiveSuite.jpg'
+import presidentialSuiteImg from './assets/rooms/web/PresidentialSuite.jpg'
 import { RevealParagraph } from './RevealText'
 import { RoomsCarousel } from './RoomsCarousel'
 import { JourneySection } from './JourneySection'
@@ -28,15 +32,15 @@ const roopaParagraphs = [
 ]
 
 const roomCards = [
-  { name: 'Superior King', image: deluxeRoomImg },
-  { name: 'Superior Queen', image: summerSuiteImg },
-  { name: 'Superior Twin', image: familySuiteImg },
-  { name: 'Premiere King', image: premiumSuiteImg },
-  { name: 'Premiere Queen', image: deluxeRoomImg },
-  { name: 'Premiere Twin', image: summerSuiteImg },
-  { name: 'Junior Suite', image: familySuiteImg },
+  { name: 'Superior King', image: superiorKingImg },
+  { name: 'Superior Queen', image: superiorQueenImg },
+  { name: 'Superior Twin', image: superiorTwinImg },
+  { name: 'Premiere King', image: premiereKingImg },
+  { name: 'Premiere Queen', image: premiereQueenImg },
+  { name: 'Premiere Twin', image: premiereTwinImg },
+  { name: 'Junior Suite', image: juniorSuiteImg },
   { name: 'Executive Suite', image: executiveSuiteImg },
-  { name: 'Presidential Suite', image: premiumSuiteImg },
+  { name: 'Presidential Suite', image: presidentialSuiteImg },
 ]
 
 const fadeUp = {
