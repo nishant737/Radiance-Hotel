@@ -19,6 +19,7 @@ import { ExploreSection } from './ExploreSection'
 import { GallerySection } from './GallerySection'
 import { ContactSection } from './ContactSection'
 import { DatePicker } from './DatePicker'
+import { buildBookingUrl, todayLocal } from './booking'
 import './App.css'
 
 const promoItems = [
@@ -56,7 +57,7 @@ function App() {
   const [isBookingOpen, setIsBookingOpen] = useState(false)
   const [checkIn, setCheckIn] = useState('')
   const [checkOut, setCheckOut] = useState('')
-  const today = new Date().toISOString().slice(0, 10)
+  const today = todayLocal()
 
 
   const handleReserveClick = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -68,6 +69,7 @@ function App() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
+    window.open(buildBookingUrl(checkIn, checkOut), '_blank', 'noopener')
     setIsBookingOpen(false)
   }
 
@@ -128,10 +130,6 @@ function App() {
               min={checkIn || today}
               onChange={setCheckOut}
             />
-            <label className="hero__booking-field">
-              <span>Guests</span>
-              <input type="text" placeholder="Add guests" />
-            </label>
           </div>
           <button
             type="submit"
@@ -142,7 +140,13 @@ function App() {
           </button>
         </form>
 
-        <div className="hero__booking-badge" aria-hidden="true">
+        <a
+          className="hero__booking-badge"
+          href={buildBookingUrl(checkIn, checkOut)}
+          target="_blank"
+          rel="noreferrer"
+          aria-label="Book now"
+        >
           <svg viewBox="0 0 100 100" className="hero__booking-badge-ring">
             <defs>
               <path
@@ -157,7 +161,7 @@ function App() {
             </text>
           </svg>
           <span className="hero__booking-badge-arrow">→</span>
-        </div>
+        </a>
       </section>
 
       <section className="promo-marquee">

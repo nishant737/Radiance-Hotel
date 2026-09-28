@@ -91,7 +91,7 @@
   transform: translateX(-50%);
   z-index: 40;
   display: grid;
-  grid-template-columns: repeat(3, 1fr) minmax(150px, auto);
+  grid-template-columns: repeat(2, 1fr) minmax(150px, auto);
   width: min(92%, 900px);
   background: var(--cream);
   border-radius: 8px;
@@ -277,6 +277,8 @@
 
 .hero__booking-badge {
   display: none;
+  text-decoration: none;
+  cursor: pointer;
 
   @media (min-width: 1025px) {
     display: block;
