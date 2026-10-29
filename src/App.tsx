@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import logo from './assets/logo-white.png'
 import heroVideo from './assets/radianceherosection.mp4'
@@ -20,6 +20,8 @@ import { GallerySection } from './GallerySection'
 import { ContactSection } from './ContactSection'
 import { DatePicker } from './DatePicker'
 import { buildBookingUrl, todayLocal } from './booking'
+import { hasMarketingConsent } from './marketingConsent'
+import { initMetaPixel } from './metaPixel'
 import './App.css'
 
 const promoItems = [
@@ -59,6 +61,11 @@ function App() {
   const [checkOut, setCheckOut] = useState('')
   const today = todayLocal()
 
+  // Fires once, client-side only (never during SSR/prerender), and only if
+  // marketing consent was already granted in an earlier session.
+  useEffect(() => {
+    if (hasMarketingConsent()) initMetaPixel()
+  }, [])
 
   const handleReserveClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     if (!isBookingOpen && window.matchMedia('(max-width: 700px)').matches) {
